@@ -1,50 +1,73 @@
 <?php
 /**
- * Sample client
+ * Amadeus Sample client
  */
- 
 require_once('Amadeus.class.php');
 
+// Instantiate the Amadeus class (Debug enabled)
 $ws = new Amadeus('AmadeusWebServices.wsdl', true);
-$ws->securityAuthenticate('AAAAAAA', 'AAAAAA', 'AAAAAAA', 12);
 
-$travelData[0]['from'] = 'BLR';
-$travelData[0]['to'] = 'MAA';
-$travelData[0]['segments'][] = array('dep_date' => '021111', 'dep_location' => 'BLR', 'dest_location' => 'MAA',  'company' => 'IC', 'flight_no' => '509', 'class' => 'W', 'passengers' => '1');
+// Authenticate
+$ws->securityAuthenticate([YOUR_SOURCE], [YOUR_ORIGIN], [YOUR_PASSWORD], [PASSWORD_LENGTH], [ORGANIZATION_ID]);
 
-$travellers['A'] = array( array('surname' => 'JOHNSON', 'first_name' => 'DWYNE') );
-$travellers['C'] = array();
-$travellers['I'] = array();
+// Travel from and to locations
+$from = 'DEL';
+$to = 'BLR';
 
-$book_data['full_name'] = 'DWYNE JOHNSON';
-$book_data['address'] = 'MR DWYNE JOHNSON, BUCKINGHAM PALACE, LONDON, N1 1BP, UK';
-$book_data['telephone'] = '012 6266262';
+// Travel Segments
+$segments[] = array(
+  'dep_date' => '230612', 
+  'dep_location' => 'DEL', 
+  'dest_location' => 'BLR',  
+  'company' => 'IT', 
+  'flight_no' => '201', 
+  'class' => 'Y', 
+  'passengers' => '2',
+);
+$segments[] = array(
+  'dep_date' => '250612', 
+  'dep_location' => 'BLR', 
+  'dest_location' => 'DEL',  
+  'company' => 'IT', 
+  'flight_no' => '202', 
+  'class' => 'Y', 
+  'passengers' => '2',
+);
 
-$types = 1;
+// Setup travellers
+$travellers['A'] = array( 
+  array(
+    'surname' => 'DOE', 
+    'first_name' => 'JOHN'
+  ),
+);
+$travellers['C'] = array( 
+  array(
+    'surname' => 'DWYNE', 
+    'first_name' => 'JOHNSON'
+  ),
+);
+$travellers['I'] = array(
+  array(
+    'first_name' => 'JANE'
+  ),
+);
 
-$data = $ws->_air_SellFromRecommendation($travelData);
-print "Air_SellFromRecommendation<br />";
-print_r($ws->client->__getLastRequest());
-print_r($ws->client->__getLastResponse());
+// Airline Code
+$code = 'IT';
 
-$data2 = $ws->pnrAddMultiElements($travellers, $book_data);
-print "PNR_AddMultiElements<br />";
-print_r($ws->client->__getLastRequest());
-print_r($ws->client->__getLastResponse());
+// Here 2 types of passengers -> Adult and a Child
+$types = 2;
 
-$data3 = $ws->_fare_PricePNRWithBookingClass();
-print "Fare_PricePNRWithBookingClass<br />";
-print_r($ws->client->__getLastRequest());
-print_r($ws->client->__getLastResponse());
+// Make the booking
+$ws->airSellFromRecommendation($from, $to, $segments);
+$ws->pnrAddMultiElements($travellers);
+$ws->farePricePNRWithBookingClass($code);
+$ws->ticketCreateTSTFromPricing($types);
+$ws->pnrAddMultiElementsFinal();
 
-$data4 = $ws->_ticket_CreateTSTFromPricing($types);
-print "Ticket_CreateTSTFromPricing<br />";
-print_r($ws->client->__getLastRequest());
-print_r($ws->client->__getLastResponse());
+// To Retreive PNR pass the PNR ID returned by the previous booking call.
+// $ws->pnrRetrieve('YFJG9V');
 
-$data5 = $ws->_pnrAddMultiElements_save();
-print "PNR_AddMultiElements<br />";
-print_r($ws->client->__getLastRequest());
-print_r($ws->client->__getLastResponse());
-
+// Signout
 $ws->securitySignout();
