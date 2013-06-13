@@ -2,10 +2,13 @@
 /**
  * Amadeus Sample client
  */
-require_once('Amadeus.class.php');
+
+namespace Example;
+
+use Amadeus\Client;
 
 // Instantiate the Amadeus class (Debug enabled)
-$ws = new Amadeus('AmadeusWebServices.wsdl', true);
+$ws = new Client('AmadeusWebServices.wsdl', true);
 
 // Authenticate
 $ws->securityAuthenticate([YOUR_SOURCE], [YOUR_ORIGIN], [YOUR_PASSWORD], [PASSWORD_LENGTH], [ORGANIZATION_ID]);
