@@ -6,6 +6,7 @@ See the [client.php](https://github.com/sunspikes/PHP-Amadeus/blob/master/exampl
 
 Login to [Amadeus Extranet](https://extranets.us.amadeus.com) for Complete API documentation.
 
+
 ### Author
 
 Krishnaprasad MG [@sunspikes]
