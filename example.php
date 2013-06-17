@@ -11,7 +11,7 @@ use Amadeus\Client;
 $ws = new Client('AmadeusWebServices.wsdl', true);
 
 // Authenticate
-$ws->securityAuthenticate('LONP02001', 'WS1APOC', 'MnJPRWJyaSZXb1V0', '12', '1A');
+$ws->securityAuthenticate([YOUR_SOURCE], [YOUR_ORIGIN], [YOUR_PASSWORD], [PASSWORD_LENGTH], [ORGANIZATION_ID]);
 
 // Travel from and to locations
 $from = 'DEL';
