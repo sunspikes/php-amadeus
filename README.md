@@ -8,7 +8,7 @@ Sample WSDL & associated XSD files can be downloaded [here](https://www.dropbox.
 
 Login to [Amadeus Extranet](https://extranets.us.amadeus.com) for Complete API documentation.
 
-**Please note, this will currently only works with the WSDL file mentioned above, It wont work with the newer versions**
+**Please note, this will currently only work with the WSDL file mentioned above, It wont work with the newer versions**
 
 ### Author
 
