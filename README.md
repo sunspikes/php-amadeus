@@ -14,7 +14,7 @@ Login to [Amadeus Extranet](https://extranets.us.amadeus.com) for Complete API d
 
 Q. Why did you create this package?
 
-A. Back in 2011 I have implemented a flight booking web app in Joomla using the Amadeues API (SOAP v2), As Amadeus doesn't have any PHP SDK i had to create a custom Joomla component based on their SOAP API. Later i hacked together a working PHP class based on that put it on GitHub thinking it may help someone who is starting an Amadeus flight booking project in PHP.
+A. Back in 2011 I have implemented a flight booking web app in Joomla using the Amadeues API (SOAP v2), As Amadeus doesn't have any PHP SDK I had to create a custom Joomla component based on their SOAP API. Later I hacked together a working PHP class based on that and put it on GitHub hoping it may help someone who is starting an Amadeus flight booking project in PHP.
 
 Q. Which Amadeus API version this package is using?
 
