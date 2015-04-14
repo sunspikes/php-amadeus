@@ -30,7 +30,7 @@ A. No. Currently neither I have access to the Amadeus extranet nor time to work 
 
 Q. Do you provide any paid support?
 
-A. Sorry, I am not currently available for any paid support.
+A. Sorry, I am not currently available for any paid support at this time.
 
 ### Author
 
