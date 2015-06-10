@@ -465,13 +465,13 @@ class Client
 	$end_date   = explode('-',$end_date);
 	
         $params = array();
-        $params['dateDetails']['businessSemantic']				 	= 'S';
-        $params['salesPeriodDetails']['beginDateTime']['year'] 	    = $start_date[0];
-        $params['salesPeriodDetails']['beginDateTime']['month'] 	= $start_date[1];
-        $params['salesPeriodDetails']['beginDateTime']['day'] 		= $start_date[2];
-        $params['salesPeriodDetails']['endDateTime']['year'] 		= $end_date[0];
-        $params['salesPeriodDetails']['endDateTime']['month'] 		= $end_date[1];
-        $params['salesPeriodDetails']['endDateTime']['day'] 		= $end_date[2];
+        $params['dateDetails']['businessSemantic']		= 'S';
+        $params['salesPeriodDetails']['beginDateTime']['year'] 	= $start_date[0];
+        $params['salesPeriodDetails']['beginDateTime']['month'] = $start_date[1];
+        $params['salesPeriodDetails']['beginDateTime']['day'] 	= $start_date[2];
+        $params['salesPeriodDetails']['endDateTime']['year'] 	= $end_date[0];
+        $params['salesPeriodDetails']['endDateTime']['month'] 	= $end_date[1];
+        $params['salesPeriodDetails']['endDateTime']['day'] 	= $end_date[2];
         
         if($airline_code <> null){
         	$params['validatingCarrierDetails']['companyIdentification']['marketingCompany'] = $airline_code;
