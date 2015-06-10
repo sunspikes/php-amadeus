@@ -450,7 +450,40 @@ class Client
 
         $this->debugDump($params, $this->_data);
     }
-
+    
+    /**
+     * SalesReports_DisplayQueryReport
+     * Retrieve a sales report by date and can filter by airline code
+     *
+     * @param string $start_date Report date start (ex: 2015-12-20)
+     * @param string $end_date Report date end (ex: 2015-12-31)
+     * @param string $airline_code airline code (ex: AA - American Airlines)
+     */
+    public function salesReport( $start_date, $end_date, $airline_code = null )
+    {
+        $start_date = explode('-',$start_date);
+	$end_date   = explode('-',$end_date);
+	
+        $params = array();
+        $params['dateDetails']['businessSemantic']				 	= 'S';
+        $params['salesPeriodDetails']['beginDateTime']['year'] 	    = $start_date[0];
+        $params['salesPeriodDetails']['beginDateTime']['month'] 	= $start_date[1];
+        $params['salesPeriodDetails']['beginDateTime']['day'] 		= $start_date[2];
+        $params['salesPeriodDetails']['endDateTime']['year'] 		= $end_date[0];
+        $params['salesPeriodDetails']['endDateTime']['month'] 		= $end_date[1];
+        $params['salesPeriodDetails']['endDateTime']['day'] 		= $end_date[2];
+        
+        if($airline_code <> null){
+        	$params['validatingCarrierDetails']['companyIdentification']['marketingCompany'] = $airline_code;
+        }
+        $params['requestOption']['selectionDetails']['option'] 	= 'SOF';
+        
+        $this->_data = $this->_client->__soapCall('SalesReports_DisplayQueryReport', $params, null,
+            new \SoapHeader(Client::AMD_HEAD_NAMESPACE, 'SessionId', $this->_headers['SessionId']), $this->_headers);
+            
+        $this->debugDump($params, $this->_data);
+    }
+    
     /**
      * Recusively dump the variable
      *
