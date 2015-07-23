@@ -16,6 +16,6 @@
         "php": ">=5.3.0"
     },
     "autoload": {
-        "psr-0": {"Amadeus": "src/"}
+        "psr-4": {"Sunspikes\\Amadeus\\": "src/"}
     }
 }
