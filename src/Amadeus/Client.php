@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Amadeus;
+namespace Sunspikes\Amadeus;
 
 /**
  * @see https://extranets.us.amadeus.com
