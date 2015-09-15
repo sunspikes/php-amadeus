@@ -1,7 +1,7 @@
 {
     "name": "sunspikes/php-amadeus",
-    "description": "Amadeus flight booking library for PHP",
-    "keywords": ["amadeus", "booking", "flight"],
+    "description": "Amadeus flight booking client for PHP",
+    "keywords": ["amadeus", "booking", "flight", "php-amadeus", "Krishnaprasad MG", "sunspikes"],
     "homepage": "http://github.com/sunspikes/php-amadeus",
     "type": "library",
     "license": "MIT",
