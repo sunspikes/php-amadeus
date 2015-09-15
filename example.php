@@ -19,42 +19,46 @@ $to = 'BLR';
 
 // Travel Segments
 $segments[] = array(
-  'dep_date' => '230612',
-  'dep_location' => 'DEL',
-  'dest_location' => 'BLR',
-  'company' => 'IT',
-  'flight_no' => '201',
-  'class' => 'Y',
-  'passengers' => '2',
+    'dep_date'      => '230612',
+    'dep_location'  => 'DEL',
+    'dest_location' => 'BLR',
+    'company'       => 'IT',
+    'flight_no'     => '201',
+    'class'         => 'Y',
+    'passengers'    => '2',
 );
 $segments[] = array(
-  'dep_date' => '250612',
-  'dep_location' => 'BLR',
-  'dest_location' => 'DEL',
-  'company' => 'IT',
-  'flight_no' => '202',
-  'class' => 'Y',
-  'passengers' => '2',
+    'dep_date'      => '250612',
+    'dep_location'  => 'BLR',
+    'dest_location' => 'DEL',
+    'company'       => 'IT',
+    'flight_no'     => '202',
+    'class'         => 'Y',
+    'passengers'    => '2',
 );
 
 // Setup travellers
 $travellers['A'] = array(
-  array(
-    'surname' => 'DOE',
-    'first_name' => 'JOHN'
-  ),
+    array(
+        'surname'    => 'DOE',
+        'first_name' => 'JOHN'
+    ),
 );
 $travellers['C'] = array(
-  array(
-    'surname' => 'DWYNE',
-    'first_name' => 'JOHNSON'
-  ),
+    array(
+        'surname'    => 'DWYNE',
+        'first_name' => 'JOHNSON'
+    ),
 );
 $travellers['I'] = array(
-  array(
-    'first_name' => 'JANE'
-  ),
+    array(
+        'first_name' => 'JANE'
+    ),
 );
+
+// Setup address and phone
+$address = 'MR ESTEBAN LORENZO, BUCKINGHAM PALACE, LONDON, N1 1BP, UK';
+$phone = '012345 678910';
 
 // Airline Code
 $code = 'IT';
@@ -64,7 +68,7 @@ $types = 2;
 
 // Make the booking
 $ws->airSellFromRecommendation($from, $to, $segments);
-$ws->pnrAddMultiElements($travellers);
+$ws->pnrAddMultiElements($travellers, $address, $phone);
 $ws->farePricePNRWithBookingClass($code);
 $ws->ticketCreateTSTFromPricing($types);
 $ws->pnrAddMultiElementsFinal();

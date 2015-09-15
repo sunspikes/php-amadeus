@@ -28,6 +28,10 @@ Q. Do you have any plans to update this package to use the SOAP v4 API?
 
 A. No. Currently neither I have access to the Amadeus extranet nor time to work on it. (Fork, May be?)
 
+Q. How can this code help me with a new implementation?
+
+A. As i mentioned earlier this is extracted from a really old project of mine, it messy. This could give you an overview the booking process and to make some test calls with the old API.
+
 Q. Do you provide any paid support?
 
 A. Sorry, I am not available for any paid support at this time.
@@ -35,3 +39,11 @@ A. Sorry, I am not available for any paid support at this time.
 ### Author
 
 Krishnaprasad MG [@sunspikes]
+
+### Contributing
+
+Please feel free to send pull requests.
+
+### License
+
+This is an open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).

@@ -20,23 +20,19 @@ class Client
      *
      * @var string
      */
-    const AMD_HEAD_NAMESPACE =  'http://webservices.amadeus.com/definitions';
-
+    const AMD_HEAD_NAMESPACE = 'http://webservices.amadeus.com/definitions';
     /**
      * Response data
      */
     private $_data = null;
-
     /**
      * Response headers
      */
     private $_headers = null;
-
     /**
      * Hold the client object
      */
     private $_client = null;
-
     /**
      * Indicates debug mode on/off
      */
@@ -49,7 +45,7 @@ class Client
     public function __construct($wsdl, $debug = false)
     {
         $this->_debug = $debug;
-        $this->_client = new \SoapClient($wsdl, array('trace'=> $debug));
+        $this->_client = new \SoapClient($wsdl, array('trace' => $debug));
     }
 
     /**
@@ -91,8 +87,13 @@ class Client
         $params['Security_Authenticate']['passwordInfo']['dataType'] = 'E';
         $params['Security_Authenticate']['passwordInfo']['binaryData'] = $password;
 
-        $this->_data = $this->_client->__soapCall('Security_Authenticate', $params, null,
-            new \SoapHeader(Client::AMD_HEAD_NAMESPACE, 'SessionId', null), $this->_headers);
+        $this->_data = $this->_client->__soapCall(
+            'Security_Authenticate',
+            $params,
+            null,
+            new \SoapHeader(Client::AMD_HEAD_NAMESPACE, 'SessionId', null),
+            $this->_headers
+        );
 
         $this->debugDump($params, $this->_data);
     }
@@ -106,8 +107,13 @@ class Client
         $params = array();
         $params['Security_SignOut']['SessionId'] = $this->_headers['SessionId'];
 
-        $this->_data = $this->_client->__soapCall('Security_SignOut', $params, null,
-            new \SoapHeader(Client::AMD_HEAD_NAMESPACE, 'SessionId', $this->_headers['SessionId']), $this->_headers);
+        $this->_data = $this->_client->__soapCall(
+            'Security_SignOut',
+            $params,
+            null,
+            new \SoapHeader(Client::AMD_HEAD_NAMESPACE, 'SessionId', $this->_headers['SessionId']),
+            $this->_headers
+        );
 
         $this->debugDump($params, $this->_data);
     }
@@ -123,8 +129,13 @@ class Client
         $params['Command_Cryptic']['longTextString']['textStringDetails'] = $string;
         $params['Command_Cryptic']['messageAction']['messageFunctionDetails']['messageFunction'] = 'M';
 
-        $this->_data = $this->_client->__soapCall('Command_Cryptic', $params, null,
-            new \SoapHeader(Client::AMD_HEAD_NAMESPACE, 'SessionId', $this->_headers['SessionId']), $this->_headers);
+        $this->_data = $this->_client->__soapCall(
+            'Command_Cryptic',
+            $params,
+            null,
+            new \SoapHeader(Client::AMD_HEAD_NAMESPACE, 'SessionId', $this->_headers['SessionId']),
+            $this->_headers
+        );
 
         $this->debugDump($params, $this->_data);
     }
@@ -152,8 +163,13 @@ class Client
         $params['Air_MultiAvailability']['requestSection']['airlineOrFlightOption']['flightIdentification']['number'] = $air_num;
         $params['Air_MultiAvailability']['requestSection']['availabilityOptions']['productTypeDetails']['typeOfRequest'] = 'TN';
 
-        $this->_data = $this->_client->__soapCall('Air_MultiAvailability', $params, null,
-            new \SoapHeader(Client::AMD_HEAD_NAMESPACE, 'SessionId', $this->_headers['SessionId']), $this->_headers);
+        $this->_data = $this->_client->__soapCall(
+            'Air_MultiAvailability',
+            $params,
+            null,
+            new \SoapHeader(Client::AMD_HEAD_NAMESPACE, 'SessionId', $this->_headers['SessionId']),
+            $this->_headers
+        );
 
         $this->debugDump($params, $this->_data);
     }
@@ -166,8 +182,6 @@ class Client
      * @param string $deprt_loc  Departure location
      * @param string $arrive_loc Arrival location
      * @param string $service    Class of service
-     * @param string $air_code   Airline code
-     * @param string $air_num    Airline number
      */
     public function airServiceAvailability($deprt_date, $deprt_loc, $arrive_loc, $service)
     {
@@ -179,8 +193,13 @@ class Client
         $params['Air_MultiAvailability']['requestSection']['availabilityOptions']['productTypeDetails']['typeOfRequest'] = 'TN';
         $params['Air_MultiAvailability']['requestSection']['cabinOption']['cabinDesignation']['cabinClassOfServiceList'] = $service;
 
-        $this->_data = $this->_client->__soapCall('Air_MultiAvailability', $params, null,
-            new \SoapHeader(Client::AMD_HEAD_NAMESPACE, 'SessionId', $this->_headers['SessionId']), $this->_headers);
+        $this->_data = $this->_client->__soapCall(
+            'Air_MultiAvailability',
+            $params,
+            null,
+            new \SoapHeader(Client::AMD_HEAD_NAMESPACE, 'SessionId', $this->_headers['SessionId']),
+            $this->_headers
+        );
 
         $this->debugDump($params, $this->_data);
     }
@@ -195,14 +214,19 @@ class Client
      * @param array  $travellers  Travellers array
      * @param string $return_date Return date
      */
-    public function fareMasterPricerTravelBoardSearch($deprt_date, $deprt_loc, $arrive_loc, $travellers, $return_date = null)
-    {
+    public function fareMasterPricerTravelBoardSearch(
+        $deprt_date,
+        $deprt_loc,
+        $arrive_loc,
+        $travellers,
+        $return_date = null
+    ) {
         $params = array();
         $j = 0;
         $params['Fare_MasterPricerTravelBoardSearch']['numberOfUnit']['unitNumberDetail'][$j]['numberOfUnits'] = $travellers['A'] + $travellers['C'];
         $params['Fare_MasterPricerTravelBoardSearch']['numberOfUnit']['unitNumberDetail'][$j]['typeOfUnit'] = 'PX';
-        $params['Fare_MasterPricerTravelBoardSearch']['numberOfUnit']['unitNumberDetail'][$j+1]['numberOfUnits'] = 200;
-        $params['Fare_MasterPricerTravelBoardSearch']['numberOfUnit']['unitNumberDetail'][$j+1]['typeOfUnit'] = 'RC';
+        $params['Fare_MasterPricerTravelBoardSearch']['numberOfUnit']['unitNumberDetail'][$j + 1]['numberOfUnits'] = 200;
+        $params['Fare_MasterPricerTravelBoardSearch']['numberOfUnit']['unitNumberDetail'][$j + 1]['typeOfUnit'] = 'RC';
         $params['Fare_MasterPricerTravelBoardSearch']['paxReference'][$j]['ptc'] = 'ADT';
 
         for ($i = 1; $i <= $travellers['A']; $i++) {
@@ -221,7 +245,7 @@ class Client
             $j++;
             $k = 0;
             $params['Fare_MasterPricerTravelBoardSearch']['paxReference'][$j]['ptc'] = 'INF';
-            for (; $i<=$travellers['I'] + $travellers['C'] + $travellers['A']; $i++) {
+            for (; $i <= $travellers['I'] + $travellers['C'] + $travellers['A']; $i++) {
                 $params['Fare_MasterPricerTravelBoardSearch']['paxReference'][$j]['traveller'][$k]['ref'] = $i;
                 $params['Fare_MasterPricerTravelBoardSearch']['paxReference'][$j]['traveller'][$k]['infantIndicator'] = 1;
                 $k++;
@@ -242,8 +266,13 @@ class Client
             $params['Fare_MasterPricerTravelBoardSearch']['itinerary'][1]['timeDetails']['firstDateTimeDetail']['date'] = $return_date;
         }
 
-        $this->_data = $this->_client->__soapCall('Fare_MasterPricerTravelBoardSearch', $params, null,
-            new \SoapHeader(Client::AMD_HEAD_NAMESPACE, 'SessionId', $this->_headers['SessionId']), $this->_headers);
+        $this->_data = $this->_client->__soapCall(
+            'Fare_MasterPricerTravelBoardSearch',
+            $params,
+            null,
+            new \SoapHeader(Client::AMD_HEAD_NAMESPACE, 'SessionId', $this->_headers['SessionId']),
+            $this->_headers
+        );
 
         $this->debugDump($params, $this->_data);
     }
@@ -252,14 +281,15 @@ class Client
      * pnrAddMultiElements
      * Make reservation call
      *
-     * @param array $travellers Travellers array
+     * @param array  $travellers Travellers array
+     * @param string $address    Address
+     * @param string $phone      Phone
      */
-    public function pnrAddMultiElements($travellers)
+    public function pnrAddMultiElements($travellers, $address, $phone)
     {
         $adults = count($travellers['A']);
         $children = count($travellers['C']);
         $infants = count($travellers['I']);
-        $total_passengers = $adults + $children + $infants;
         $params = array();
         $params['PNR_AddMultiElements']['pnrActions']['optionCode'] = 0;
 
@@ -268,7 +298,7 @@ class Client
         foreach ($travellers['A'] as $adult) {
             $trav = 0;
             $params['PNR_AddMultiElements']['travellerInfo'][$i]['elementManagementPassenger']['reference']['qualifier'] = 'PR';
-            $params['PNR_AddMultiElements']['travellerInfo'][$i]['elementManagementPassenger']['reference']['number'] = $i+1;
+            $params['PNR_AddMultiElements']['travellerInfo'][$i]['elementManagementPassenger']['reference']['number'] = $i + 1;
             $params['PNR_AddMultiElements']['travellerInfo'][$i]['elementManagementPassenger']['segmentName'] = 'NM';
 
             $params['PNR_AddMultiElements']['travellerInfo'][$i]['passengerData']['travellerInformation']['traveller']['surname'] = $adult['surname'];
@@ -291,7 +321,7 @@ class Client
             foreach ($travellers['C'] as $child) {
                 $trav = 0;
                 $params['PNR_AddMultiElements']['travellerInfo'][$i]['elementManagementPassenger']['reference']['qualifier'] = 'PR';
-                $params['PNR_AddMultiElements']['travellerInfo'][$i]['elementManagementPassenger']['reference']['number'] = $i+1;
+                $params['PNR_AddMultiElements']['travellerInfo'][$i]['elementManagementPassenger']['reference']['number'] = $i + 1;
                 $params['PNR_AddMultiElements']['travellerInfo'][$i]['elementManagementPassenger']['segmentName'] = 'NM';
 
                 $params['PNR_AddMultiElements']['travellerInfo'][$i]['passengerData']['travellerInformation']['traveller']['surname'] = $child['surname'];
@@ -308,34 +338,39 @@ class Client
         $params['PNR_AddMultiElements']['dataElementsMaster']['dataElementsIndiv'][$j]['elementManagementData']['reference']['qualifier'] = 'OT';
         $params['PNR_AddMultiElements']['dataElementsMaster']['dataElementsIndiv'][$j]['elementManagementData']['reference']['number'] = 1;
         $params['PNR_AddMultiElements']['dataElementsMaster']['dataElementsIndiv'][$j]['elementManagementData']['segmentName'] = 'RF';
-        $params['PNR_AddMultiElements']['dataElementsMaster']['dataElementsIndiv'][$j]['freetextData']['freetextDetail']['subjectQualifier']= 3;
-        $params['PNR_AddMultiElements']['dataElementsMaster']['dataElementsIndiv'][$j]['freetextData']['freetextDetail']['type']= 'P22';
+        $params['PNR_AddMultiElements']['dataElementsMaster']['dataElementsIndiv'][$j]['freetextData']['freetextDetail']['subjectQualifier'] = 3;
+        $params['PNR_AddMultiElements']['dataElementsMaster']['dataElementsIndiv'][$j]['freetextData']['freetextDetail']['type'] = 'P22';
         $params['PNR_AddMultiElements']['dataElementsMaster']['dataElementsIndiv'][$j]['freetextData']['longFreetext'] = 'Received From Whoever';
 
         $j++;
         $params['PNR_AddMultiElements']['dataElementsMaster']['dataElementsIndiv'][$j]['elementManagementData']['reference']['qualifier'] = 'OT';
         $params['PNR_AddMultiElements']['dataElementsMaster']['dataElementsIndiv'][$j]['elementManagementData']['reference']['number'] = 2;
         $params['PNR_AddMultiElements']['dataElementsMaster']['dataElementsIndiv'][$j]['elementManagementData']['segmentName'] = 'TK';
-        $params['PNR_AddMultiElements']['dataElementsMaster']['dataElementsIndiv'][$j]['ticketElement']['ticket']['indicator']= 'OK';
+        $params['PNR_AddMultiElements']['dataElementsMaster']['dataElementsIndiv'][$j]['ticketElement']['ticket']['indicator'] = 'OK';
 
         $j++;
         $params['PNR_AddMultiElements']['dataElementsMaster']['dataElementsIndiv'][$j]['elementManagementData']['reference']['qualifier'] = 'OT';
         $params['PNR_AddMultiElements']['dataElementsMaster']['dataElementsIndiv'][$j]['elementManagementData']['reference']['number'] = 3;
         $params['PNR_AddMultiElements']['dataElementsMaster']['dataElementsIndiv'][$j]['elementManagementData']['segmentName'] = 'ABU';
-        $params['PNR_AddMultiElements']['dataElementsMaster']['dataElementsIndiv'][$j]['freetextData']['freetextDetail']['subjectQualifier']= 3;
-        $params['PNR_AddMultiElements']['dataElementsMaster']['dataElementsIndiv'][$j]['freetextData']['freetextDetail']['type']= 2;
-        $params['PNR_AddMultiElements']['dataElementsMaster']['dataElementsIndiv'][$j]['freetextData']['longFreetext'] = 'MR ESTEBAN LORENZO, BUCKINGHAM PALACE, LONDON, N1 1BP, UK';
+        $params['PNR_AddMultiElements']['dataElementsMaster']['dataElementsIndiv'][$j]['freetextData']['freetextDetail']['subjectQualifier'] = 3;
+        $params['PNR_AddMultiElements']['dataElementsMaster']['dataElementsIndiv'][$j]['freetextData']['freetextDetail']['type'] = 2;
+        $params['PNR_AddMultiElements']['dataElementsMaster']['dataElementsIndiv'][$j]['freetextData']['longFreetext'] = $address;
 
         $j++;
         $params['PNR_AddMultiElements']['dataElementsMaster']['dataElementsIndiv'][$j]['elementManagementData']['reference']['qualifier'] = 'OT';
         $params['PNR_AddMultiElements']['dataElementsMaster']['dataElementsIndiv'][$j]['elementManagementData']['reference']['number'] = 4;
         $params['PNR_AddMultiElements']['dataElementsMaster']['dataElementsIndiv'][$j]['elementManagementData']['segmentName'] = 'AP';
-        $params['PNR_AddMultiElements']['dataElementsMaster']['dataElementsIndiv'][$j]['freetextData']['freetextDetail']['subjectQualifier']= 3;
-        $params['PNR_AddMultiElements']['dataElementsMaster']['dataElementsIndiv'][$j]['freetextData']['freetextDetail']['type']= 5;
-        $params['PNR_AddMultiElements']['dataElementsMaster']['dataElementsIndiv'][$j]['freetextData']['longFreetext'] = '012345 678910';
+        $params['PNR_AddMultiElements']['dataElementsMaster']['dataElementsIndiv'][$j]['freetextData']['freetextDetail']['subjectQualifier'] = 3;
+        $params['PNR_AddMultiElements']['dataElementsMaster']['dataElementsIndiv'][$j]['freetextData']['freetextDetail']['type'] = 5;
+        $params['PNR_AddMultiElements']['dataElementsMaster']['dataElementsIndiv'][$j]['freetextData']['longFreetext'] = $phone;
 
-        $this->_data = $this->_client->__soapCall('PNR_AddMultiElements', $params, null,
-            new \SoapHeader(Client::AMD_HEAD_NAMESPACE, 'SessionId', $this->_headers['SessionId']), $this->_headers);
+        $this->_data = $this->_client->__soapCall(
+            'PNR_AddMultiElements',
+            $params,
+            null,
+            new \SoapHeader(Client::AMD_HEAD_NAMESPACE, 'SessionId', $this->_headers['SessionId']),
+            $this->_headers
+        );
 
         $this->debugDump($params, $this->_data);
     }
@@ -370,8 +405,13 @@ class Client
             $i++;
         }
 
-        $this->_data = $this->_client->__soapCall('Air_SellFromRecommendation', $params, null,
-            new \SoapHeader(Client::AMD_HEAD_NAMESPACE, 'SessionId', $this->_headers['SessionId']), $this->_headers);
+        $this->_data = $this->_client->__soapCall(
+            'Air_SellFromRecommendation',
+            $params,
+            null,
+            new \SoapHeader(Client::AMD_HEAD_NAMESPACE, 'SessionId', $this->_headers['SessionId']),
+            $this->_headers
+        );
 
         $this->debugDump($params, $this->_data);
     }
@@ -389,8 +429,13 @@ class Client
         $params['Fare_PricePNRWithBookingClass']['overrideInformation']['attributeDetails'][2]['attributeType'] = 'RU';
         //$params['Fare_PricePNRWithBookingClass']['overrideInformation']['validatingCarrier']['carrierInformation']['carrierCode'] = $code;
 
-        $this->_data = $this->_client->__soapCall('Fare_PricePNRWithBookingClass', $params, null,
-            new \SoapHeader(Client::AMD_HEAD_NAMESPACE, 'SessionId', $this->_headers['SessionId']), $this->_headers);
+        $this->_data = $this->_client->__soapCall(
+            'Fare_PricePNRWithBookingClass',
+            $params,
+            null,
+            new \SoapHeader(Client::AMD_HEAD_NAMESPACE, 'SessionId', $this->_headers['SessionId']),
+            $this->_headers
+        );
 
         $this->debugDump($params, $this->_data);
     }
@@ -406,26 +451,36 @@ class Client
 
         for ($i = 0; $i < $types; $i++) {
             $params['Ticket_CreateTSTFromPricing']['psaList'][$i]['itemReference']['referenceType'] = 'TST';
-            $params['Ticket_CreateTSTFromPricing']['psaList'][$i]['itemReference']['uniqueReference'] = $i+1;
+            $params['Ticket_CreateTSTFromPricing']['psaList'][$i]['itemReference']['uniqueReference'] = $i + 1;
         }
 
-        $this->_data = $this->_client->__soapCall('Ticket_CreateTSTFromPricing', $params, null,
-            new \SoapHeader(Client::AMD_HEAD_NAMESPACE, 'SessionId', $this->_headers['SessionId']), $this->_headers);
+        $this->_data = $this->_client->__soapCall(
+            'Ticket_CreateTSTFromPricing',
+            $params,
+            null,
+            new \SoapHeader(Client::AMD_HEAD_NAMESPACE, 'SessionId', $this->_headers['SessionId']),
+            $this->_headers
+        );
 
         $this->debugDump($params, $this->_data);
     }
 
     /**
-    * PNR_AddMultiElements
-    * Final save operation
-    */
+     * PNR_AddMultiElements
+     * Final save operation
+     */
     public function pnrAddMultiElementsFinal()
     {
         $params = array();
         $params['PNR_AddMultiElements']['pnrActions']['optionCode'] = 11;
 
-        $this->_data = $this->_client->__soapCall('PNR_AddMultiElements', $params, null,
-            new \SoapHeader(Client::AMD_HEAD_NAMESPACE, 'SessionId', $this->_headers['SessionId']), $this->_headers);
+        $this->_data = $this->_client->__soapCall(
+            'PNR_AddMultiElements',
+            $params,
+            null,
+            new \SoapHeader(Client::AMD_HEAD_NAMESPACE, 'SessionId', $this->_headers['SessionId']),
+            $this->_headers
+        );
 
         $this->debugDump($params, $this->_data);
     }
@@ -442,45 +497,55 @@ class Client
         $params['PNR_Retrieve']['retrievalFacts']['retrieve']['type'] = 2;
         $params['PNR_Retrieve']['retrievalFacts']['reservationOrProfileIdentifier']['reservation']['controlNumber'] = $pnr_id;
 
-        $this->_data = $this->_client->__soapCall('PNR_Retrieve', $params, null,
-            new \SoapHeader(Client::AMD_HEAD_NAMESPACE, 'SessionId', $this->_headers['SessionId']), $this->_headers);
+        $this->_data = $this->_client->__soapCall(
+            'PNR_Retrieve',
+            $params,
+            null,
+            new \SoapHeader(Client::AMD_HEAD_NAMESPACE, 'SessionId', $this->_headers['SessionId']),
+            $this->_headers
+        );
 
         $this->debugDump($params, $this->_data);
     }
-    
+
     /**
      * SalesReports_DisplayQueryReport
      * Retrieve a sales report by date and can filter by airline code
      *
-     * @param string $start_date Report date start (ex: 2015-12-20)
-     * @param string $end_date Report date end (ex: 2015-12-31)
+     * @param string $start_date   Report date start (ex: 2015-12-20)
+     * @param string $end_date     Report date end (ex: 2015-12-31)
      * @param string $airline_code airline code (ex: AA - American Airlines)
      */
-    public function salesReport( $start_date, $end_date, $airline_code = null )
+    public function salesReport($start_date, $end_date, $airline_code = null)
     {
-        $start_date = explode('-',$start_date);
-	$end_date   = explode('-',$end_date);
-	
+        $start_date = explode('-', $start_date);
+        $end_date = explode('-', $end_date);
+
         $params = array();
-        $params['dateDetails']['businessSemantic']		= 'S';
-        $params['salesPeriodDetails']['beginDateTime']['year'] 	= $start_date[0];
+        $params['dateDetails']['businessSemantic'] = 'S';
+        $params['salesPeriodDetails']['beginDateTime']['year'] = $start_date[0];
         $params['salesPeriodDetails']['beginDateTime']['month'] = $start_date[1];
-        $params['salesPeriodDetails']['beginDateTime']['day'] 	= $start_date[2];
-        $params['salesPeriodDetails']['endDateTime']['year'] 	= $end_date[0];
-        $params['salesPeriodDetails']['endDateTime']['month'] 	= $end_date[1];
-        $params['salesPeriodDetails']['endDateTime']['day'] 	= $end_date[2];
-        
-        if($airline_code <> null){
-        	$params['validatingCarrierDetails']['companyIdentification']['marketingCompany'] = $airline_code;
+        $params['salesPeriodDetails']['beginDateTime']['day'] = $start_date[2];
+        $params['salesPeriodDetails']['endDateTime']['year'] = $end_date[0];
+        $params['salesPeriodDetails']['endDateTime']['month'] = $end_date[1];
+        $params['salesPeriodDetails']['endDateTime']['day'] = $end_date[2];
+
+        if ($airline_code <> null) {
+            $params['validatingCarrierDetails']['companyIdentification']['marketingCompany'] = $airline_code;
         }
-        $params['requestOption']['selectionDetails']['option'] 	= 'SOF';
-        
-        $this->_data = $this->_client->__soapCall('SalesReports_DisplayQueryReport', $params, null,
-            new \SoapHeader(Client::AMD_HEAD_NAMESPACE, 'SessionId', $this->_headers['SessionId']), $this->_headers);
-            
+        $params['requestOption']['selectionDetails']['option'] = 'SOF';
+
+        $this->_data = $this->_client->__soapCall(
+            'SalesReports_DisplayQueryReport',
+            $params,
+            null,
+            new \SoapHeader(Client::AMD_HEAD_NAMESPACE, 'SessionId', $this->_headers['SessionId']),
+            $this->_headers
+        );
+
         $this->debugDump($params, $this->_data);
     }
-    
+
     /**
      * Recusively dump the variable
      *
@@ -489,7 +554,7 @@ class Client
      */
     private function dumpVariable($varname, $varval)
     {
-        if (! is_array($varval) && ! is_object($varval)) {
+        if (!is_array($varval) && !is_object($varval)) {
             print $varname . ' = ' . $varval . "<br>\n";
         } else {
             print $varname . " = data()<br>\n";
