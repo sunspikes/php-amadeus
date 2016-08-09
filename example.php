@@ -3,12 +3,12 @@
  * Amadeus Sample client
  */
 
-include 'src/Amadeus/Client.php';
+include 'vendor/autoload.php';
 
 use Sunspikes\Amadeus\Client;
 
 // Instantiate the Amadeus class (Debug enabled)
-$ws = new Client('AmadeusWebServices.wsdl', true);
+$ws = new Client('wsdl/AmadeusWebServices.wsdl', true);
 
 // Authenticate
 $ws->securityAuthenticate([YOUR_SOURCE], [YOUR_ORIGIN], [YOUR_PASSWORD], [PASSWORD_LENGTH], [ORGANIZATION_ID]);
@@ -69,8 +69,8 @@ $types = 2;
 // Make the booking
 $ws->airSellFromRecommendation($from, $to, $segments);
 $ws->pnrAddMultiElements($travellers, $address, $phone);
-$ws->farePricePNRWithBookingClass($code);
-$ws->ticketCreateTSTFromPricing($types);
+$ws->farePricePnrWithBookingClass($code);
+$ws->ticketCreateTstFromPricing($types);
 $ws->pnrAddMultiElementsFinal();
 
 // To Retreive PNR pass the PNR ID returned by the previous booking call.
