@@ -47,7 +47,7 @@ class AmadeusSoapClient
             $method,
             $params,
             null,
-            new \SoapHeader(Client::AMD_HEAD_NAMESPACE, 'SessionId', null),
+            new \SoapHeader(self::AMD_HEAD_NAMESPACE, 'SessionId', $this->headers['SessionId']?:null),
             $this->headers
         );
 
@@ -77,7 +77,7 @@ class AmadeusSoapClient
     private function debugDump($method, $params)
     {
         /** @noinspection ForgottenDebugOutputInspection */
-        print_r([
+        var_dump([
             'method' => $method,
             'params' => $params,
             'data' => $this->data,

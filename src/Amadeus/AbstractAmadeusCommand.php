@@ -32,7 +32,7 @@ abstract class AbstractAmadeusCommand implements AmadeusCommandInterface
             throw new AmadeusClientException("Error: Set the AmadeusSoapClient");
         }
 
-        return $this->amadeusSoapClient->execute(
+        $this->amadeusSoapClient->execute(
             $this->getName(),
             $this->getParameters()
         );
