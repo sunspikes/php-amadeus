@@ -1,5 +1,8 @@
 ## PHP Amadeus
 
+[![Latest Stable Version](https://poser.pugx.org/sunspikes/php-amadeus/v/stable)](https://packagist.org/packages/sunspikes/php-amadeus)
+[![License](https://poser.pugx.org/sunspikes/php-amadeus/license)](https://packagist.org/packages/sunspikes/php-amadeus)
+
 This is a PHP implementation of the Amadeus Flight Search and Booking API.
 
 See the [example.php](https://github.com/sunspikes/PHP-Amadeus/blob/master/example.php) for usage.
