@@ -1,0 +1,21 @@
+{
+    "name": "sunspikes/php-amadeus",
+    "description": "Amadeus flight booking client for PHP",
+    "keywords": ["amadeus", "booking", "flight", "php-amadeus", "Krishnaprasad MG", "sunspikes"],
+    "homepage": "http://github.com/sunspikes/php-amadeus",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Krishnaprasad MG",
+            "email": "sunspikes@gmail.com",
+            "homepage": "http://www.sunspikes.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "psr-4": {"Sunspikes\\": "src/"}
+    }
+}
