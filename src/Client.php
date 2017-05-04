@@ -27,7 +27,7 @@ class Client
      */
     public function __construct($wsdl, $debug = false)
     {
-        $this->client = new AmadeusSoapClient($wsdl, array('trace' => $debug));
+        $this->client = new AmadeusSoapClient($wsdl, $debug);
     }
 
     /**
