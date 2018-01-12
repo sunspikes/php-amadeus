@@ -1,3 +1,6 @@
+***Deprecated:***
+__Please consider the [Amadeus WS Client](https://github.com/amabnl/amadeus-ws-client) library which is more feature rich and up to date.__
+
 ## PHP Amadeus
 
 [![Latest Stable Version](https://poser.pugx.org/sunspikes/php-amadeus/v/stable)](https://packagist.org/packages/sunspikes/php-amadeus)
